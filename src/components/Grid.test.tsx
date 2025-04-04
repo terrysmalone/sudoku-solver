@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Grid } from "./Grid";
+import React from "react";
 
 test("Empty squares should render", () => {
   const squares: (number | undefined)[] = new Array(9).fill(undefined);
@@ -29,4 +30,16 @@ test("numbered squares should render", () => {
     expect(Number(test)).toEqual(squares[counter]);
     counter++;
   }
+});
+
+test("Should call onSquareClick with index when clicked", () => {
+  const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const handleClick = jest.fn();
+  render(<Grid squares={squares} onSquareClick={handleClick}></Grid>);
+
+  const squareElements = screen.getAllByTestId("square");
+  fireEvent.click(squareElements[5]);
+
+  expect(handleClick).toHaveBeenCalledTimes(1);
+  expect(handleClick).toHaveBeenCalledWith(5);
 });

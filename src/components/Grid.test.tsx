@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { Grid } from "./Grid";
 
 test("Empty squares should render", () => {
   const squares: (number | undefined)[] = new Array(9).fill(undefined);

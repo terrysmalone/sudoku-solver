@@ -1,11 +1,14 @@
 import React from "react";
 import "./App.css";
 import { Square } from "./components/Square";
+import { Grid } from "./components/Grid";
 
 function App() {
+  const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   return (
     <div>
-      <Square value={"3"} onSquareClick={() => {}} />
+      <Grid squares={squares} />
     </div>
   );
 }

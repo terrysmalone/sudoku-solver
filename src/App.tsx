@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import { Square } from "./components/Square";
 import { Grid } from "./components/Grid";
 
 function App() {

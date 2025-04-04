@@ -3,7 +3,7 @@ import { Grid } from "./Grid";
 
 test("Empty squares should render", () => {
   const squares: (number | undefined)[] = new Array(9).fill(undefined);
-  render(<Grid squares={squares}></Grid>);
+  render(<Grid squares={squares} onSquareClick={() => {}}></Grid>);
 
   const items = screen.getAllByTestId("grid-item");
 
@@ -17,7 +17,7 @@ test("Empty squares should render", () => {
 
 test("numbered squares should render", () => {
   const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  render(<Grid squares={squares}></Grid>);
+  render(<Grid squares={squares} onSquareClick={() => {}}></Grid>);
 
   const items = screen.getAllByTestId("grid-item");
 

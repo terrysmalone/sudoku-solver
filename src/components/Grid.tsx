@@ -3,17 +3,19 @@ import "../Styles/Grid.css";
 
 type GridProps = {
   squares: (number | undefined)[];
-  onSquareClick: (index: number) => void;
+  onSquareClick: (squareIndex: number) => void;
 };
 
 export const Grid = ({ squares, onSquareClick }: GridProps) => {
+  console.log("squares: ", squares);
+
   return (
     <div className="grid">
-      {squares.map((value, index) => (
-        <div data-testid="grid-item" key={index}>
+      {squares.map((value, squareIndex) => (
+        <div data-testid="grid-item" key={squareIndex}>
           <Square
             value={getStringValue(value)}
-            onSquareClick={() => onSquareClick(index)}
+            onSquareClick={() => onSquareClick(squareIndex)}
           />
         </div>
       ))}

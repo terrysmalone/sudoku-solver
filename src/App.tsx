@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./Styles/App.css";
 import { Grid } from "./components/Grid";
 
 function App() {

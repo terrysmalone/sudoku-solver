@@ -1,5 +1,5 @@
 import { Square } from "./Square";
-import "./Grid.css";
+import "../Styles/Grid.css";
 
 type GridProps = {
   squares: (number | undefined)[];

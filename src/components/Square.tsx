@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import "./Square.css";
+import "../Styles/Square.css";
 
 type SquareProps = {
   value: string;

@@ -1,4 +1,5 @@
 import { Grid } from "./Grid";
+import "../Styles/Board.css";
 
 type BoardProps = {
   grids: (number | undefined)[][];

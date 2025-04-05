@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import "./Square.css";
 
 type SquareProps = {
   value: string;
@@ -7,7 +8,7 @@ type SquareProps = {
 
 export const Square = ({ value, onSquareClick }: SquareProps) => {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button data-testid="square" className="square" onClick={onSquareClick}>
       {value}
     </button>
   );

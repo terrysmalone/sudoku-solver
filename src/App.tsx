@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { Square } from "./components/Square";
+import { Grid } from "./components/Grid";
 
 function App() {
+  const [squares, setSquares] = useState<(number | undefined)[]>(
+    Array(9).fill(undefined),
+  );
+
+  const handleSquareClick = (index: number) => {
+    const newSquares = [...squares];
+
+    if (squares[index] === undefined) {
+      newSquares[index] = 1;
+    } else if (squares[index] === 9) {
+      newSquares[index] = undefined;
+    } else {
+      // @ts-ignore
+      newSquares[index]++;
+    }
+
+    setSquares(newSquares);
+  };
+
   return (
     <div>
-      <Square value={"3"} onSquareClick={() => {}} />
+      <Grid squares={squares} onSquareClick={handleSquareClick} />
     </div>
   );
 }

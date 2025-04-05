@@ -3,31 +3,19 @@ import "../Styles/Board.css";
 
 type BoardProps = {
   grids: (number | undefined)[][];
+  onSquareClick: (gridIndex: number, squareIndex: number) => void;
 };
 
-export const Board = ({ grids }: BoardProps) => {
-  const handleClick = (gridIndex: number, squareIndex: number) => {
-    console.log("gridIndex: ", gridIndex);
-    console.log("squareIndex: ", squareIndex);
-    // const newSquares = [...squares];
-    // if (squares[index] === undefined) {
-    //   newSquares[index] = 1;
-    // } else if (squares[index] === 9) {
-    //   newSquares[index] = undefined;
-    // } else {
-    // @ts-ignore
-    //   newSquares[index]++;
-    //  }
-    //  setSquares(newSquares);
-  };
-
+export const Board = ({ grids, onSquareClick }: BoardProps) => {
   return (
     <div className="board">
       {grids.map((value, gridIndex) => (
         <div data-testid="board-item" key={gridIndex}>
           <Grid
             squares={value}
-            onSquareClick={(squareIndex) => handleClick(gridIndex, squareIndex)}
+            onSquareClick={(squareIndex) =>
+              onSquareClick(gridIndex, squareIndex)
+            }
           />
         </div>
       ))}

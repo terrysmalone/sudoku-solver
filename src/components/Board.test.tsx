@@ -7,7 +7,7 @@ test("Empty squares should render", () => {
   const grids: (number | undefined)[][] = new Array(9).fill(
     new Array(9).fill(undefined),
   );
-  render(<Board grids={grids}></Board>);
+  render(<Board grids={grids} onSquareClick={() => {}}></Board>);
 
   const items = screen.getAllByTestId("grid-item");
 

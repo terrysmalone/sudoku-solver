@@ -1,5 +1,5 @@
 import "@testing-library/react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React, { useState } from "react";
 import { Board } from "./Board";
 
@@ -52,3 +52,26 @@ test("Correct squares render", () => {
     counter++;
   }
 });
+
+test.each([
+  [0, 0, 0],
+  [5, 0, 5],
+  [32, 3, 5],
+  [80, 8, 8],
+])(
+  "Correct square is registered for click at %s",
+  (clickSquare, expectedGrid, expectedSquare) => {
+    const grids: (number | undefined)[][] = new Array(9).fill(
+      new Array(9).fill(undefined),
+    );
+    const handleClick = jest.fn();
+
+    render(<Board grids={grids} onSquareClick={handleClick}></Board>);
+
+    const squareElements = screen.getAllByTestId("square");
+    fireEvent.click(squareElements[clickSquare]);
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalledWith(expectedGrid, expectedSquare);
+  },
+);

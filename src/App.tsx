@@ -11,8 +11,8 @@ function App() {
     Array(9).fill(5),
     Array(9).fill(6),
     Array(9).fill(7),
-    Array(9).fill(7),
     Array(9).fill(8),
+    Array(9).fill(9),
   ]);
 
   const handleClick = (gridIndex: number, squareIndex: number) => {

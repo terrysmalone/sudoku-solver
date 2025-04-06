@@ -16,6 +16,7 @@ export const Grid = ({ squares, onSquareClick }: GridProps) => {
           <Square
             value={getStringValue(value)}
             onSquareClick={() => onSquareClick(squareIndex)}
+            disabled={!isNaN(Number(value))}
           />
         </div>
       ))}

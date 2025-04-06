@@ -12,7 +12,8 @@ export const Game = () => {
     populateTestGrid(8),
     populateTestGrid(3),
     populateTestGrid(6),
-    populateTestGrid(9),
+    [1, 1, undefined, 1, 1, 1, 1, 1, 1],
+    // populateTestGrid(9),
   ]);
 
   const handleClick = (gridIndex: number, squareIndex: number) => {

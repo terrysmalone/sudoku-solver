@@ -33,7 +33,7 @@ test("numbered squares should render", () => {
 });
 
 test("Should call onSquareClick with index when clicked", () => {
-  const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const squares = new Array(9).fill(undefined);
   const handleClick = jest.fn();
   render(<Grid squares={squares} onSquareClick={handleClick}></Grid>);
 
@@ -42,4 +42,15 @@ test("Should call onSquareClick with index when clicked", () => {
 
   expect(handleClick).toHaveBeenCalledTimes(1);
   expect(handleClick).toHaveBeenCalledWith(5);
+});
+
+test("Should not call onSquareClick for disabled square", () => {
+  const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const handleClick = jest.fn();
+  render(<Grid squares={squares} onSquareClick={handleClick}></Grid>);
+
+  const squareElements = screen.getAllByTestId("square");
+  fireEvent.click(squareElements[5]);
+
+  expect(handleClick).toHaveBeenCalledTimes(0);
 });

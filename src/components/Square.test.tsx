@@ -18,3 +18,15 @@ test("Should call onSquareClick when clicked", () => {
 
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
+
+test("Should not call onSquareClick if square is disabled", () => {
+  const handleClick = jest.fn();
+  render(
+    <Square value={""} onSquareClick={handleClick} disabled={true}></Square>,
+  );
+
+  const button = screen.getByRole("button");
+  fireEvent.click(button);
+
+  expect(handleClick).toHaveBeenCalledTimes(0);
+});

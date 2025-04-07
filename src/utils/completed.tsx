@@ -1,5 +1,22 @@
-export const isCompleted = (): boolean => {
-  return false;
+export const isCompleted = (grids: (number | undefined)[][]): boolean => {
+  // Check full grids
+  for (let grid of grids) {
+    if (!isArrayComplete(grid)) {
+      return false;
+    }
+  }
+
+  // Check rows
+  // for 0 yo 8
+  //    if(!isArrayComplete(getRow(grids, i){
+  //       return false;
+
+  // Check columns
+  // for 0 yo 8
+  //    if(!isArrayComplete(getColumn(grids, i){
+  //       return false;
+
+  return true;
 };
 
 const isArrayComplete = (array: (number | undefined)[]): boolean => {

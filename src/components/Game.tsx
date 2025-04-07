@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Board } from "./Board";
-import { countUp } from "../utils/generate";
+import { countUp, testVeryEasy } from "../utils/generate";
 import "../Styles/Game.css";
+import { isCompleted } from "../utils/completed";
 
 export const Game = () => {
-  const [grids, setGrids] = useState<(number | undefined)[][]>(countUp());
+  const [grids, setGrids] = useState<(number | undefined)[][]>(testVeryEasy());
 
   const handleClick = (gridIndex: number, squareIndex: number) => {
     const newGrids = [...grids];
@@ -16,8 +17,14 @@ export const Game = () => {
     setGrids(newGrids);
   };
 
+  let status: string = "Not solved";
+  if (isCompleted(grids)) {
+    status = "Solved";
+  }
+
   return (
     <div className="game">
+      <div className="status">{status}</div>
       <Board grids={grids} onSquareClick={handleClick} />
     </div>
   );

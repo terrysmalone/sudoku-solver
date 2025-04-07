@@ -7,8 +7,6 @@ type GridProps = {
 };
 
 export const Grid = ({ squares, onSquareClick }: GridProps) => {
-  console.log("squares: ", squares);
-
   return (
     <div className="grid">
       {squares.map((value, squareIndex) => (

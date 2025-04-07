@@ -4,9 +4,9 @@ import { populateTestGrid } from "../utils/generate";
 
 export const Game = () => {
   const [grids, setGrids] = useState<(number | undefined)[][]>([
-    populateTestGrid(1),
-    populateTestGrid(4),
-    populateTestGrid(7),
+    [1, 2, undefined, 4, 5, 6, 7, 8, 9],
+    [4, undefined, 6, 7, undefined, undefined, 1, 2, 3],
+    [7, 8, 9, 1, 2, 3, 4, 5, 6],
     populateTestGrid(2),
     populateTestGrid(5),
     populateTestGrid(8),

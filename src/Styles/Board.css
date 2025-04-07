@@ -3,6 +3,5 @@
     display: grid;
     grid-template-columns: repeat(3, 104px);
     grid-template-rows: repeat(3, 104px);
-    width: 314px;
     gap: 0;
 }

@@ -33,27 +33,14 @@ export const testVeryEasy = (): (number | undefined)[][] => {
   let grid: (number | undefined)[][] = [
     [9, 8, 6, 7, undefined, 2, 5, 4, 3],
     [3, 2, 4, 5, 9, 8, 6, 7, undefined],
-    [undefined, 7, 8, 3, 4, 6, 9, 5, 2],
+    [7, undefined, 5, 3, 4, 6, 9, 8, 2],
     [3, 2, 7, undefined, 5, 8, 4, 6, 9],
     [undefined, 5, 6, 9, 4, 2, 7, 8, 3],
     [4, 9, 8, 6, 3, 7, 5, 2, undefined],
     [6, 9, undefined, 2, 7, 5, 8, 3, 4],
     [8, 3, 5, 4, undefined, 9, 2, 6, 7],
-    [2, 9, 4, 8, 6, 3, 7, undefined, 5],
+    [2, 7, 4, 8, 6, 3, undefined, 5, 9],
   ];
-
-  return grid;
-};
-
-export const countUp = (): (number | undefined)[][] => {
-  let grid: (number | undefined)[][] = [];
-
-  for (let i = 0; i < 9; i++) {
-    grid[i] = [];
-    for (let j = 0; j < 9; j++) {
-      grid[i][j] = i * 9 + j;
-    }
-  }
 
   return grid;
 };

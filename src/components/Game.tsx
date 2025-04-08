@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Board } from "./Board";
-import { countUp, testVeryEasy } from "../utils/generate";
+import { testVeryEasy } from "../utils/generate";
 import "../Styles/Game.css";
 import { isCompleted } from "../utils/completed";
 
@@ -23,10 +23,12 @@ export const Game = () => {
   }
 
   return (
-    <div className="game">
-      <div className="status">{status}</div>
-      <Board grids={grids} onSquareClick={handleClick} />
-    </div>
+    <>
+      <div>{status}</div>
+      <div className="game">
+        <Board grids={grids} onSquareClick={handleClick} />
+      </div>
+    </>
   );
 };
 

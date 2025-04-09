@@ -4,6 +4,7 @@ import { Game } from "./components/Game";
 function App() {
   return (
     <div>
+      <title>Sudoku</title>
       <Game />
     </div>
   );

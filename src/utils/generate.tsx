@@ -1,4 +1,4 @@
-export const testFullyPopulated = (): (number | undefined)[][] => {
+export function testFullyPopulated(): (number | undefined)[][] {
   let grid: (number | undefined)[][] = [
     populateTestGrid(1),
     populateTestGrid(4),
@@ -12,9 +12,9 @@ export const testFullyPopulated = (): (number | undefined)[][] => {
   ];
 
   return grid;
-};
+}
 
-const populateTestGrid = (startNumber: number): (number | undefined)[] => {
+function populateTestGrid(startNumber: number): (number | undefined)[] {
   let squares: (number | undefined)[] = [];
 
   for (let i = 0; i < 9; i++) {
@@ -27,9 +27,9 @@ const populateTestGrid = (startNumber: number): (number | undefined)[] => {
   }
 
   return squares;
-};
+}
 
-export const testVeryEasy = (): (number | undefined)[][] => {
+export function testVeryEasy(): (number | undefined)[][] {
   let grid: (number | undefined)[][] = [
     [9, 8, 6, 7, undefined, 2, 5, 4, 3],
     [3, 2, 4, 5, 9, 8, 6, 7, undefined],
@@ -43,4 +43,4 @@ export const testVeryEasy = (): (number | undefined)[][] => {
   ];
 
   return grid;
-};
+}

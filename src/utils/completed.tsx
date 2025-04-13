@@ -1,4 +1,4 @@
-export const isCompleted = (grids: (number | undefined)[][]): boolean => {
+export function isCompleted(grids: (number | undefined)[][]): boolean {
   // Check full grids
   for (let grid of grids) {
     if (!isArrayComplete(grid)) {
@@ -21,9 +21,9 @@ export const isCompleted = (grids: (number | undefined)[][]): boolean => {
   }
 
   return true;
-};
+}
 
-const isArrayComplete = (array: (number | undefined)[]): boolean => {
+function isArrayComplete(array: (number | undefined)[]): boolean {
   if (array.length !== 9) {
     throw new RangeError(
       `Array should have 9 elements. It has ${array.length}`,
@@ -52,12 +52,12 @@ const isArrayComplete = (array: (number | undefined)[]): boolean => {
   }
 
   return true;
-};
+}
 
-const getRow = (
+function getRow(
   grids: (number | undefined)[][],
   rowIndex: number,
-): (number | undefined)[] => {
+): (number | undefined)[] {
   let row: (number | undefined)[] = [];
 
   const rowLine: number[] = rowLines[rowIndex];
@@ -70,7 +70,7 @@ const getRow = (
   }
 
   return row;
-};
+}
 
 const rowLines: number[][] = [
   [0, 1, 2, 9, 10, 11, 18, 19, 20],
@@ -90,7 +90,7 @@ const getColumn = (
 ): (number | undefined)[] => {
   let column: (number | undefined)[] = [];
 
-  const columnLine: number[] = rowLines[columnIndex];
+  const columnLine: number[] = columnLines[columnIndex];
 
   for (let i = 0; i < 9; i++) {
     let gridIndex: number = Math.floor(columnLine[i] / 9);

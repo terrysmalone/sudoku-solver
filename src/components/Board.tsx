@@ -6,7 +6,7 @@ type BoardProps = {
   onSquareClick: (gridIndex: number, squareIndex: number) => void;
 };
 
-export const Board = ({ grids, onSquareClick }: BoardProps) => {
+export function Board({ grids, onSquareClick }: BoardProps) {
   return (
     <div className="board">
       {grids.map((value, gridIndex) => (
@@ -21,4 +21,4 @@ export const Board = ({ grids, onSquareClick }: BoardProps) => {
       ))}
     </div>
   );
-};
+}

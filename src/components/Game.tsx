@@ -4,7 +4,7 @@ import { testVeryEasy } from "../utils/generate";
 import "../Styles/Game.css";
 import { isCompleted } from "../utils/completed";
 
-export const Game = () => {
+export function Game() {
   const [grids, setGrids] = useState<(number | undefined)[][]>(testVeryEasy());
 
   const handleClick = (gridIndex: number, squareIndex: number) => {
@@ -30,7 +30,7 @@ export const Game = () => {
       </div>
     </>
   );
-};
+}
 
 function getNextValue(num: number | undefined): number | undefined {
   if (num === undefined) {

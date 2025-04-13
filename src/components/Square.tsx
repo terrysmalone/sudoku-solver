@@ -7,11 +7,11 @@ type SquareProps = {
   disabled?: boolean;
 };
 
-export const Square = ({
+export function Square({
   value,
   onSquareClick,
   disabled = false,
-}: SquareProps) => {
+}: SquareProps) {
   const initialDisabled = useRef(disabled);
 
   return (
@@ -24,4 +24,4 @@ export const Square = ({
       {value}
     </button>
   );
-};
+}

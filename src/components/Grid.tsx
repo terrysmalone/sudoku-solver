@@ -6,7 +6,7 @@ type GridProps = {
   onSquareClick: (squareIndex: number) => void;
 };
 
-export const Grid = ({ squares, onSquareClick }: GridProps) => {
+export function Grid({ squares, onSquareClick }: GridProps) {
   return (
     <div className="grid">
       {squares.map((value, squareIndex) => (
@@ -20,7 +20,7 @@ export const Grid = ({ squares, onSquareClick }: GridProps) => {
       ))}
     </div>
   );
-};
+}
 
 function getStringValue(value: number | undefined): string {
   if (value === undefined) {

@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Board } from "./Board";
-import { testImport } from "../utils/generate";
 import "../Styles/Game.css";
+import "../Styles/Centre.css";
+import "../Styles/Button.css";
 import { isCompleted } from "../utils/completed";
+import { getPuzzle, getPuzzleCount } from "../utils/PuzzleProvider";
 
 export function Game() {
-  const [grids, setGrids] = useState<(number | undefined)[][]>(testImport());
+  const puzzleCount = getPuzzleCount();
+  const [currentPuzzle, setCurrentPuzzle] = useState(0);
+  const [grids, setGrids] = useState<(number | undefined)[][]>(
+    getPuzzle(currentPuzzle),
+  );
+
+  useEffect(() => {
+    setGrids(getPuzzle(currentPuzzle));
+    console.log("currentPuzzle:", currentPuzzle);
+  }, [currentPuzzle]);
 
   const handleClick = (gridIndex: number, squareIndex: number) => {
     const newGrids = [...grids];
@@ -27,6 +38,22 @@ export function Game() {
       <div>{status}</div>
       <div className="game">
         <Board grids={grids} onSquareClick={handleClick} />
+      </div>
+      <div className="centre">
+        <button
+          onClick={() => setCurrentPuzzle(currentPuzzle - 1)}
+          className="button"
+          disabled={currentPuzzle === 0}
+        >
+          {"<"}
+        </button>
+        <button
+          onClick={() => setCurrentPuzzle(currentPuzzle + 1)}
+          className="button"
+          disabled={currentPuzzle >= puzzleCount - 1}
+        >
+          {">"}
+        </button>
       </div>
     </>
   );

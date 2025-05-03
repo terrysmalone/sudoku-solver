@@ -1,3 +1,5 @@
+import puzzles from "./../data/puzzles.json";
+
 export function testFullyPopulated(): (number | undefined)[][] {
   let grid: (number | undefined)[][] = [
     populateTestGrid(1),
@@ -41,6 +43,14 @@ export function testVeryEasy(): (number | undefined)[][] {
     [8, 3, 5, 4, undefined, 9, 2, 6, 7],
     [2, 7, 4, 8, 6, 3, undefined, 5, 9],
   ];
+
+  return grid;
+}
+
+export function testImport(): (number | undefined)[][] {
+  const grid = puzzles[0].puzzle.map((row) =>
+    row.map((cell) => (cell === 0 ? undefined : cell)),
+  );
 
   return grid;
 }

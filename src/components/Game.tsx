@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Board } from "./Board";
-import { testVeryEasy } from "../utils/generate";
+import { testImport } from "../utils/generate";
 import "../Styles/Game.css";
 import { isCompleted } from "../utils/completed";
 
 export function Game() {
-  const [grids, setGrids] = useState<(number | undefined)[][]>(testVeryEasy());
+  const [grids, setGrids] = useState<(number | undefined)[][]>(testImport());
 
   const handleClick = (gridIndex: number, squareIndex: number) => {
     const newGrids = [...grids];

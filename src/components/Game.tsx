@@ -48,6 +48,7 @@ export function Game() {
         >
           {"<"}
         </button>
+        <label>Puzzle {currentPuzzle + 1}</label>
         <button
           onClick={() => setCurrentPuzzle(currentPuzzle + 1)}
           className="button"

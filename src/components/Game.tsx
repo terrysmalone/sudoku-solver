@@ -4,12 +4,13 @@ import "../Styles/Game.css";
 import "../Styles/Centre.css";
 import "../Styles/Button.css";
 import { isCompleted } from "../utils/completed";
-import { getPuzzle, getPuzzleCount } from "../utils/PuzzleProvider";
+import { getPuzzle, getPuzzleCount } from "../utils/puzzleProvider";
+import { SudokuSquare } from "../types/SudokuSquare";
 
 export function Game() {
   const puzzleCount = getPuzzleCount();
   const [currentPuzzle, setCurrentPuzzle] = useState(0);
-  const [grids, setGrids] = useState<(number | undefined)[][]>(
+  const [grids, setGrids] = useState<SudokuSquare[][]>(
     getPuzzle(currentPuzzle),
   );
 
@@ -59,12 +60,19 @@ export function Game() {
   );
 }
 
-function getNextValue(num: number | undefined): number | undefined {
-  if (num === undefined) {
-    return 1;
-  } else if (num === 9) {
-    return undefined;
+function getNextValue(square: SudokuSquare): SudokuSquare {
+  let nextNum: number | undefined = undefined;
+
+  if (square.value === undefined) {
+    nextNum = 1;
+  } else if (square.value === 9) {
+    nextNum = undefined;
   } else {
-    return num + 1;
+    nextNum = square.value + 1;
   }
+
+  return {
+    value: nextNum,
+    isFixed: square.isFixed,
+  };
 }

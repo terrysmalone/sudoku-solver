@@ -1,4 +1,4 @@
-import { MouseEventHandler, useRef } from "react";
+import { MouseEventHandler } from "react";
 import "../Styles/Square.css";
 
 type SquareProps = {
@@ -12,14 +12,12 @@ export function Square({
   onSquareClick,
   disabled = false,
 }: SquareProps) {
-  const initialDisabled = useRef(disabled);
-
   return (
     <button
       data-testid="square"
       className="square"
       onClick={onSquareClick}
-      disabled={initialDisabled.current}
+      disabled={disabled}
     >
       {value}
     </button>

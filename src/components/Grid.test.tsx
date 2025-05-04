@@ -1,9 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Grid } from "./Grid";
 import React from "react";
+import { SudokuSquare } from "../types/SudokuSquare";
+import {
+  getEmptySudokuSquareGrid,
+  getSudokuSquareGrid,
+} from "../test-utils/SudukoSquareBuilder";
 
 test("Empty squares should render", () => {
-  const squares: (number | undefined)[] = new Array(9).fill(undefined);
+  const squares: SudokuSquare[] = getEmptySudokuSquareGrid();
   render(<Grid squares={squares} onSquareClick={() => {}}></Grid>);
 
   const items = screen.getAllByTestId("grid-item");
@@ -17,7 +22,7 @@ test("Empty squares should render", () => {
 });
 
 test("numbered squares should render", () => {
-  const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const squares = getSudokuSquareGrid([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   render(<Grid squares={squares} onSquareClick={() => {}}></Grid>);
 
   const items = screen.getAllByTestId("grid-item");
@@ -27,13 +32,13 @@ test("numbered squares should render", () => {
   let counter = 0;
   for (const item of items) {
     const test = item.textContent;
-    expect(Number(test)).toEqual(squares[counter]);
+    expect(Number(test)).toEqual(squares[counter].value);
     counter++;
   }
 });
 
 test("Should call onSquareClick with index when clicked", () => {
-  const squares = new Array(9).fill(undefined);
+  const squares = getEmptySudokuSquareGrid();
   const handleClick = jest.fn();
   render(<Grid squares={squares} onSquareClick={handleClick}></Grid>);
 
@@ -43,9 +48,8 @@ test("Should call onSquareClick with index when clicked", () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
   expect(handleClick).toHaveBeenCalledWith(5);
 });
-
 test("Should not call onSquareClick for disabled square", () => {
-  const squares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const squares = getSudokuSquareGrid([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const handleClick = jest.fn();
   render(<Grid squares={squares} onSquareClick={handleClick}></Grid>);
 

@@ -1,12 +1,14 @@
 import "@testing-library/react";
 import { exportedForTesting } from "./completed";
+import { SudokuSquare } from "../types/SudokuSquare";
+import { getSudokuSquareGrid } from "../test-utils/SudukoSquareBuilder";
 
 const { isArrayComplete } = exportedForTesting;
 
 test.each([0, 3, 8, 10])(
   "Wrong size array should throw error for %s",
   (arraySize: number) => {
-    const array: (number | undefined)[] = new Array(arraySize);
+    const array: SudokuSquare[] = new Array(arraySize);
 
     const t = () => {
       isArrayComplete(array);
@@ -26,7 +28,7 @@ test.each([
   "Arrays with invalid numbers should throw error for %s",
   (invalidNumber: number, array: (number | undefined)[]) => {
     const t = () => {
-      isArrayComplete(array);
+      isArrayComplete(getSudokuSquareGrid(array));
     };
 
     expect(t).toThrow(RangeError);
@@ -38,7 +40,7 @@ test.each([
 
 test("Array with undefined should return false", () => {
   const array: (number | undefined)[] = [1, 2, 3, 4, 5, 6, undefined, 8, 9];
-  const result: boolean = isArrayComplete(array);
+  const result: boolean = isArrayComplete(getSudokuSquareGrid(array));
   expect(result).toBe(false);
 });
 
@@ -49,7 +51,7 @@ test.each([
 ])(
   "Arrays with duplicates should return false",
   (array: (number | undefined)[]) => {
-    const result: boolean = isArrayComplete(array);
+    const result: boolean = isArrayComplete(getSudokuSquareGrid(array));
     expect(result).toBe(false);
   },
 );
@@ -61,7 +63,7 @@ test.each([
 ])(
   "Array with correct numbers should return true for %s",
   (array: (number | undefined)[]) => {
-    const result: boolean = isArrayComplete(array);
+    const result: boolean = isArrayComplete(getSudokuSquareGrid(array));
     expect(result).toBe(true);
   },
 );

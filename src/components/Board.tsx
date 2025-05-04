@@ -1,8 +1,9 @@
 import { Grid } from "./Grid";
 import "../Styles/Board.css";
+import { SudokuSquare } from "../types/SudokuSquare";
 
 type BoardProps = {
-  grids: (number | undefined)[][];
+  grids: SudokuSquare[][];
   onSquareClick: (gridIndex: number, squareIndex: number) => void;
 };
 

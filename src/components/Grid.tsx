@@ -1,20 +1,21 @@
 import { Square } from "./Square";
 import "../Styles/Grid.css";
+import { SudokuSquare } from "../types/SudokuSquare";
 
 type GridProps = {
-  squares: (number | undefined)[];
+  squares: SudokuSquare[];
   onSquareClick: (squareIndex: number) => void;
 };
 
 export function Grid({ squares, onSquareClick }: GridProps) {
   return (
     <div className="grid">
-      {squares.map((value, squareIndex) => (
+      {squares.map((square, squareIndex) => (
         <div data-testid="grid-item" key={squareIndex}>
           <Square
-            value={getStringValue(value)}
+            value={getStringValue(square.value)}
             onSquareClick={() => onSquareClick(squareIndex)}
-            disabled={!isNaN(Number(value))}
+            disabled={square.isFixed}
           />
         </div>
       ))}

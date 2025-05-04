@@ -1,12 +1,13 @@
 import "@testing-library/react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import React, { useState } from "react";
+import React from "react";
 import { Board } from "./Board";
+import { SudokuSquare } from "../types/SudokuSquare";
+import { getEmptyGrid, getFilledGrid } from "../test-utils/SudukoSquareBuilder";
 
 test("Empty squares should render", () => {
-  const grids: (number | undefined)[][] = new Array(9).fill(
-    new Array(9).fill(undefined),
-  );
+  const grids: SudokuSquare[][] = getEmptyGrid();
+
   render(<Board grids={grids} onSquareClick={() => {}}></Board>);
 
   const items = screen.getAllByTestId("grid-item");
@@ -20,17 +21,9 @@ test("Empty squares should render", () => {
 });
 
 test("Correct squares render", () => {
-  const grids: (number | undefined)[][] = [
-    Array(9).fill(1),
-    Array(9).fill(2),
-    Array(9).fill(3),
-    Array(9).fill(4),
-    Array(9).fill(5),
-    Array(9).fill(6),
-    Array(9).fill(7),
-    Array(9).fill(8),
-    Array(9).fill(9),
-  ];
+  const grids: SudokuSquare[][] = getFilledGrid(
+    Array.from({ length: 9 }, (_, i) => Array.from({ length: 9 }, () => i + 1)),
+  );
 
   render(<Board grids={grids} onSquareClick={() => {}}></Board>);
 
@@ -61,9 +54,7 @@ test.each([
 ])(
   "Correct square is registered for click at %s",
   (clickSquare, expectedGrid, expectedSquare) => {
-    const grids: (number | undefined)[][] = new Array(9).fill(
-      new Array(9).fill(undefined),
-    );
+    const grids: SudokuSquare[][] = getEmptyGrid();
     const handleClick = jest.fn();
 
     render(<Board grids={grids} onSquareClick={handleClick}></Board>);

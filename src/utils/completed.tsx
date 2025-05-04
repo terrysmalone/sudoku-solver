@@ -1,4 +1,6 @@
-export function isCompleted(grids: (number | undefined)[][]): boolean {
+import { SudokuSquare } from "../types/SudokuSquare";
+
+export function isCompleted(grids: SudokuSquare[][]): boolean {
   // Check full grids
   for (let grid of grids) {
     if (!isArrayComplete(grid)) {
@@ -23,7 +25,7 @@ export function isCompleted(grids: (number | undefined)[][]): boolean {
   return true;
 }
 
-function isArrayComplete(array: (number | undefined)[]): boolean {
+function isArrayComplete(array: SudokuSquare[]): boolean {
   if (array.length !== 9) {
     throw new RangeError(
       `Array should have 9 elements. It has ${array.length}`,
@@ -33,11 +35,11 @@ function isArrayComplete(array: (number | undefined)[]): boolean {
   let numUsed: boolean[] = new Array(10).fill(false);
 
   for (let i = 0; i < 9; i++) {
-    if (isNaN(Number(array[i]))) {
+    if (isNaN(Number(array[i].value))) {
       return false;
     }
 
-    let currentNum = Number(array[i]);
+    let currentNum = Number(array[i].value);
     if (currentNum < 1 || currentNum > 9) {
       throw new RangeError(
         `Array should only contain numbers 1-9. It contains ${currentNum}`,
@@ -54,11 +56,8 @@ function isArrayComplete(array: (number | undefined)[]): boolean {
   return true;
 }
 
-function getRow(
-  grids: (number | undefined)[][],
-  rowIndex: number,
-): (number | undefined)[] {
-  let row: (number | undefined)[] = [];
+function getRow(grids: SudokuSquare[][], rowIndex: number): SudokuSquare[] {
+  let row: SudokuSquare[] = [];
 
   const rowLine: number[] = rowLines[rowIndex];
 
@@ -85,10 +84,10 @@ const rowLines: number[][] = [
 ];
 
 const getColumn = (
-  grids: (number | undefined)[][],
+  grids: SudokuSquare[][],
   columnIndex: number,
-): (number | undefined)[] => {
-  let column: (number | undefined)[] = [];
+): SudokuSquare[] => {
+  let column: SudokuSquare[] = [];
 
   const columnLine: number[] = columnLines[columnIndex];
 

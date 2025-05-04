@@ -1,5 +1,5 @@
 import { Grid } from "./Grid";
-import "../Styles/Board.css";
+import "../styles/Board.css";
 import { SudokuSquare } from "../types/SudokuSquare";
 
 type BoardProps = {

@@ -5,7 +5,7 @@ import { SudokuSquare } from "../types/SudokuSquare";
 import {
   getEmptySudokuSquareGrid,
   getSudokuSquareGrid,
-} from "../test-utils/SudukoSquareBuilder";
+} from "../test-utils/sudukoSquareBuilder";
 
 test("Empty squares should render", () => {
   const squares: SudokuSquare[] = getEmptySudokuSquareGrid();

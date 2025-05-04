@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { Board } from "./Board";
 import { SudokuSquare } from "../types/SudokuSquare";
-import { getEmptyGrid, getFilledGrid } from "../test-utils/SudukoSquareBuilder";
+import { getEmptyGrid, getFilledGrid } from "../test-utils/sudukoSquareBuilder";
 
 test("Empty squares should render", () => {
   const grids: SudokuSquare[][] = getEmptyGrid();

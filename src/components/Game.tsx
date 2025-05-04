@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Board } from "./Board";
-import "../Styles/Game.css";
-import "../Styles/Centre.css";
-import "../Styles/Button.css";
+import "../styles/Game.css";
+import "../styles/Centre.css";
+import "../styles/Button.css";
 import { isCompleted } from "../utils/completed";
 import { getPuzzle, getPuzzleCount } from "../utils/puzzleProvider";
 import { SudokuSquare } from "../types/SudokuSquare";

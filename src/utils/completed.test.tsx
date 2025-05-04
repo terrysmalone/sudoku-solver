@@ -1,7 +1,7 @@
 import "@testing-library/react";
 import { exportedForTesting } from "./completed";
 import { SudokuSquare } from "../types/SudokuSquare";
-import { getSudokuSquareGrid } from "../test-utils/SudukoSquareBuilder";
+import { getSudokuSquareGrid } from "../test-utils/sudukoSquareBuilder";
 
 const { isArrayComplete } = exportedForTesting;
 

@@ -1,7 +1,7 @@
 import puzzles from "./../data/puzzles.json";
 
 export function testFullyPopulated(): (number | undefined)[][] {
-  let grid: (number | undefined)[][] = [
+  const grid: (number | undefined)[][] = [
     populateTestGrid(1),
     populateTestGrid(4),
     populateTestGrid(7),
@@ -17,7 +17,7 @@ export function testFullyPopulated(): (number | undefined)[][] {
 }
 
 function populateTestGrid(startNumber: number): (number | undefined)[] {
-  let squares: (number | undefined)[] = [];
+  const squares: (number | undefined)[] = [];
 
   for (let i = 0; i < 9; i++) {
     if (startNumber > 9) {
@@ -32,7 +32,7 @@ function populateTestGrid(startNumber: number): (number | undefined)[] {
 }
 
 export function testVeryEasy(): (number | undefined)[][] {
-  let grid: (number | undefined)[][] = [
+  const grid: (number | undefined)[][] = [
     [9, 8, 6, 7, undefined, 2, 5, 4, 3],
     [3, 2, 4, 5, 9, 8, 6, 7, undefined],
     [7, undefined, 5, 3, 4, 6, 9, 8, 2],

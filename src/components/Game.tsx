@@ -6,6 +6,7 @@ import "../styles/Button.css";
 import { isCompleted } from "../utils/completed";
 import { getPuzzle, getPuzzleCount } from "../utils/puzzleProvider";
 import { SudokuSquare } from "../types/SudokuSquare";
+import { loadPuzzle, savePuzzle } from "../utils/fileManagement";
 
 export function Game() {
   const puzzleCount = getPuzzleCount();
@@ -14,9 +15,14 @@ export function Game() {
     getPuzzle(currentPuzzle),
   );
 
+  // Load the current puzzle
   useEffect(() => {
-    setGrids(getPuzzle(currentPuzzle));
-    console.log("currentPuzzle:", currentPuzzle);
+    const savedPuzzle = loadPuzzle(currentPuzzle);
+    if (savedPuzzle) {
+      setGrids(savedPuzzle);
+    } else {
+      setGrids(getPuzzle(currentPuzzle));
+    }
   }, [currentPuzzle]);
 
   const handleClick = (gridIndex: number, squareIndex: number) => {
@@ -27,6 +33,9 @@ export function Game() {
     );
 
     setGrids(newGrids);
+
+    // Save the puzzle state
+    savePuzzle(currentPuzzle, newGrids);
   };
 
   let status: string = "Not solved";

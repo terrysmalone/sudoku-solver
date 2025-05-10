@@ -3,6 +3,7 @@ import { Board } from "./Board";
 import "../styles/Game.css";
 import "../styles/Centre.css";
 import "../styles/Button.css";
+import "../styles/Status.css";
 import { isCompleted } from "../utils/completed";
 import { getPuzzle, getPuzzleCount } from "../utils/puzzleProvider";
 import { SudokuSquare } from "../types/SudokuSquare";
@@ -45,7 +46,6 @@ export function Game() {
 
   return (
     <>
-      <div>{status}</div>
       <div className="game">
         <Board grids={grids} onSquareClick={handleClick} />
       </div>
@@ -65,6 +65,12 @@ export function Game() {
         >
           {">"}
         </button>
+      </div>
+      <div
+        className="status"
+        style={{ color: status === "Solved" ? "green" : "red" }}
+      >
+        {status}
       </div>
     </>
   );

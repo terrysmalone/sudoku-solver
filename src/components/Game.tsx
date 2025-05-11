@@ -12,6 +12,7 @@ import {
   loadPuzzle,
   savePuzzle,
 } from "../utils/fileManagement";
+import { solvePuzzle } from "../utils/solver";
 
 export function Game() {
   const puzzleCount = getPuzzleCount();
@@ -45,6 +46,12 @@ export function Game() {
 
     // Save the puzzle state
     savePuzzle(currentPuzzle, newGrids);
+  };
+
+  const handleSolveClick = () => {
+    const solvedGrids: SudokuSquare[][] = solvePuzzle(grids);
+    setGrids(solvedGrids);
+    savePuzzle(currentPuzzle, solvedGrids);
   };
 
   const handleClearClick = () => {
@@ -86,6 +93,7 @@ export function Game() {
         {status}
       </div>
       <div className="centre">
+        <button onClick={handleSolveClick}>Solve</button>
         <button onClick={handleClearClick}>Clear</button>
       </div>
     </>

@@ -72,6 +72,9 @@ export function Game() {
       >
         {status}
       </div>
+      <div className="centre">
+        <button>Clear</button>
+      </div>
     </>
   );
 }

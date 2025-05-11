@@ -1,18 +1,20 @@
 import { SudokuSquare } from "../types/SudokuSquare";
 
+const SUDOKU_PUZZLE_KEY: string = "sudoku_puzzle_";
+
 export function savePuzzle(
   puzzleNumber: number,
   puzzleState: SudokuSquare[][],
 ) {
   localStorage.setItem(
-    "sudoku_puzzle_" + puzzleNumber.toString(),
+    SUDOKU_PUZZLE_KEY + puzzleNumber.toString(),
     JSON.stringify(puzzleState),
   );
 }
 
 export function loadPuzzle(puzzleNumber: number): SudokuSquare[][] | null {
   const puzzleState = localStorage.getItem(
-    "sudoku_puzzle_" + puzzleNumber.toString(),
+    SUDOKU_PUZZLE_KEY + puzzleNumber.toString(),
   );
 
   if (puzzleState) {
@@ -20,4 +22,8 @@ export function loadPuzzle(puzzleNumber: number): SudokuSquare[][] | null {
   }
 
   return null;
+}
+
+export function clearSavedPuzzle(puzzleNumber: number) {
+  localStorage.removeItem(SUDOKU_PUZZLE_KEY + puzzleNumber.toString());
 }

@@ -7,7 +7,11 @@ import "../styles/Status.css";
 import { isCompleted } from "../utils/completed";
 import { getPuzzle, getPuzzleCount } from "../utils/puzzleProvider";
 import { SudokuSquare } from "../types/SudokuSquare";
-import { loadPuzzle, savePuzzle } from "../utils/fileManagement";
+import {
+  clearSavedPuzzle,
+  loadPuzzle,
+  savePuzzle,
+} from "../utils/fileManagement";
 
 export function Game() {
   const puzzleCount = getPuzzleCount();
@@ -18,15 +22,19 @@ export function Game() {
 
   // Load the current puzzle
   useEffect(() => {
+    resetPuzzle();
+  }, [currentPuzzle]);
+
+  function resetPuzzle() {
     const savedPuzzle = loadPuzzle(currentPuzzle);
     if (savedPuzzle) {
       setGrids(savedPuzzle);
     } else {
       setGrids(getPuzzle(currentPuzzle));
     }
-  }, [currentPuzzle]);
+  }
 
-  const handleClick = (gridIndex: number, squareIndex: number) => {
+  const handleSquareClick = (gridIndex: number, squareIndex: number) => {
     const newGrids = [...grids];
 
     newGrids[gridIndex][squareIndex] = getNextValue(
@@ -39,6 +47,11 @@ export function Game() {
     savePuzzle(currentPuzzle, newGrids);
   };
 
+  const handleClearClick = () => {
+    clearSavedPuzzle(currentPuzzle);
+    resetPuzzle();
+  };
+
   let status: string = "Not solved";
   if (isCompleted(grids)) {
     status = "Solved";
@@ -47,7 +60,7 @@ export function Game() {
   return (
     <>
       <div className="game">
-        <Board grids={grids} onSquareClick={handleClick} />
+        <Board grids={grids} onSquareClick={handleSquareClick} />
       </div>
       <div className="centre">
         <button
@@ -73,7 +86,7 @@ export function Game() {
         {status}
       </div>
       <div className="centre">
-        <button>Clear</button>
+        <button onClick={handleClearClick}>Clear</button>
       </div>
     </>
   );

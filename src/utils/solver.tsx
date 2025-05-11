@@ -4,6 +4,7 @@ export function solvePuzzle(puzzle: SudokuSquare[][]): SudokuSquare[][] {
   const solvedPuzzle: SudokuSquare[][] = getEmptySudokuSquareGrid();
 
   let currentSquare: number = 0;
+  //const attemptedSquares: number[] = [];
   const currentNum: number = 1;
 
   while (currentSquare < 81) {
@@ -19,9 +20,12 @@ export function solvePuzzle(puzzle: SudokuSquare[][]): SudokuSquare[][] {
       };
     } else {
       solvedPuzzle[i][j].value = currentNum;
-      //          start count at 1
-      //          add count into this spot
-      //          if it's still valid
+      // while current num <= 9
+      //   solvedPuzzle[i][j].value = currentNum;
+      //    if it's a safe move
+      //       attemptedSquares.push(currentSquare);
+      //    else
+      // Go to next
     }
 
     currentSquare++;

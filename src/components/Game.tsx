@@ -49,9 +49,10 @@ export function Game() {
   };
 
   const handleSolveClick = () => {
-    const solvedGrids: SudokuSquare[][] = solvePuzzle(grids);
-    setGrids(solvedGrids);
-    savePuzzle(currentPuzzle, solvedGrids);
+    const newGrids = [...grids];
+    solvePuzzle(newGrids);
+    setGrids(newGrids);
+    savePuzzle(currentPuzzle, newGrids);
   };
 
   const handleClearClick = () => {

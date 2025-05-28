@@ -1,50 +1,43 @@
 import { SudokuSquare } from "../types/SudokuSquare";
+import { getColumn, getRow } from "./checker";
+import { gridToColumn, gridToRow } from "./pointTranslator";
 
 export function solvePuzzle(puzzle: SudokuSquare[][]) {
-  // const solvedPuzzle: SudokuSquare[][] = getEmptySudokuSquareGrid();
-
   solveSudoku(puzzle, 0, 0);
 }
 
-/*function getEmptySudokuSquareGrid(): SudokuSquare[][] {
-  return Array.from({ length: 9 }, () =>
-    Array.from({ length: 9 }, () => getEmptySquare()),
-  );
-}*/
-
-/*function getEmptySquare(): SudokuSquare {
-  return {
-    value: undefined,
-    isFixed: false,
-  } as SudokuSquare;
-}*/
-
 function solveSudoku(
   puzzle: SudokuSquare[][],
-  row: number,
-  col: number,
+  gridIndex: number,
+  squareIndex: number,
 ): boolean {
-  if (row === 8 && col === 9) return true;
+  if (gridIndex === 8 && squareIndex === 9) {
+    return true;
+  }
 
-  if (col === 9) {
-    row++;
-    col = 0;
+  if (squareIndex === 9) {
+    gridIndex++;
+    squareIndex = 0;
   }
 
   // If cell is already solved then move forward
   // NOTE: Do we want to add something in here for if it has a num already?
-  if (puzzle[row][col].isFixed) {
-    return solveSudoku(puzzle, row, col + 1);
+  if (
+    puzzle[gridIndex][squareIndex].isFixed ||
+    (puzzle[gridIndex][squareIndex].value !== 0 &&
+      puzzle[gridIndex][squareIndex].value !== undefined)
+  ) {
+    return solveSudoku(puzzle, gridIndex, squareIndex + 1);
   }
 
   for (let num = 1; num <= 9; num++) {
     // If it is safe to place num at current position
-    if (isSafe(puzzle, row, col, num)) {
-      puzzle[row][col].value = num;
-      if (solveSudoku(puzzle, row, col + 1)) {
+    if (isSafe(puzzle, gridIndex, squareIndex, num)) {
+      puzzle[gridIndex][squareIndex].value = num;
+      if (solveSudoku(puzzle, gridIndex, squareIndex + 1)) {
         return true;
       }
-      puzzle[row][col].value = 0;
+      puzzle[gridIndex][squareIndex].value = 0;
     }
   }
 
@@ -53,25 +46,37 @@ function solveSudoku(
 
 function isSafe(
   puzzle: SudokuSquare[][],
-  row: number,
-  col: number,
+  gridIndex: number,
+  squareIndex: number,
   num: number,
 ): boolean {
   // Check if num exists in the row
-  for (let x = 0; x < 9; x++) if (puzzle[row][x].value === num) return false;
+  const rowIndex: number = gridToRow(gridIndex, squareIndex);
+  const gridRow: SudokuSquare[] = getRow(puzzle, rowIndex);
 
-  // Check if num exists in the col
-  for (let x = 0; x < 9; x++) if (puzzle[x][col].value === num) return false;
+  for (let i = 0; i < 9; i++) {
+    if (gridRow[i].value === num) {
+      return false;
+    }
+  }
 
-  // Check if num exists in the 3x3 sub-matrix
-  const startRow = row - (row % 3),
-    startCol = col - (col % 3);
+  // Check if num exists in the colum
+  const columnIndex: number = gridToColumn(gridIndex, squareIndex);
 
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      if (puzzle[i + startRow][j + startCol].value === num) {
-        return false;
-      }
+  const gridColumn: SudokuSquare[] = getColumn(puzzle, columnIndex);
+
+  for (let i = 0; i < 9; i++) {
+    if (gridColumn[i].value === num) {
+      return false;
+    }
+  }
+
+  // Check if num exists in grid
+  const grid: SudokuSquare[] = puzzle[gridIndex];
+
+  for (let i = 0; i < 9; i++) {
+    if (grid[i].value === num) {
+      return false;
     }
   }
 

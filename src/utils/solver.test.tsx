@@ -18,9 +18,9 @@ test("Can solve with missing ones", () => {
 
   const puzzle: SudokuSquare[][] = getFilledGrid(puzzleNums);
 
-  const solved = solvePuzzle(puzzle);
+  solvePuzzle(puzzle);
 
-  expect(isCompleted(solved)).toBe(true);
+  expect(isCompleted(puzzle)).toBe(true);
 });
 
 test("Can solve complex puzzle", () => {
@@ -38,7 +38,7 @@ test("Can solve complex puzzle", () => {
 
   const puzzle: SudokuSquare[][] = getFilledGrid(puzzleNums);
 
-  const solved = solvePuzzle(puzzle);
+  solvePuzzle(puzzle);
 
-  expect(isCompleted(solved)).toBe(true);
+  expect(isCompleted(puzzle)).toBe(true);
 });
